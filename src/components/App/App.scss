@@ -1,0 +1,31 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+input {
+  box-sizing: border-box;
+}
+
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .user-info {
+    padding: 10px;
+  }
+
+  .main-currency {
+    display: flex;
+
+    .label {
+      margin-right: 5px;
+    }
+  }
+}
