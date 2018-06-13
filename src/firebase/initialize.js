@@ -9,12 +9,12 @@ import removeEventHandlers from './removeEventHandlers';
 
 export default (dispatch) => {
   firebase.initializeApp({
+    apiKey,
     authDomain: 'security-tradings.firebaseapp.com',
     databaseURL: 'https://security-tradings.firebaseio.com',
     projectId: 'security-tradings',
     storageBucket: 'security-tradings.appspot.com',
-    messagingSenderId: '383918451149',
-    apiKey
+    messagingSenderId: '383918451149'
   });
 
   let userId = '';

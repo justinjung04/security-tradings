@@ -6,12 +6,20 @@ export default {
   user: {
     id: '',
     name: '',
-    securities: [],
-    transactions: []
+    action: {
+      type: '',
+      security: {}
+    }
+  },
+  security: {
+    list: []
+  },
+  transaction: {
+    list: []
   },
   currency: {
     list: [],
-    active: 'CAD',
+    active: '',
     rates: {}
   }
 }

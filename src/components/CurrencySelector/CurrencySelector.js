@@ -7,17 +7,19 @@ import './CurrencySelector.scss';
 
 class CurrencySelector extends React.PureComponent {
   render() {
-    const { value, onChange, currencyList } = this.props;
+    const { forwardedRef, defaultValue, value, onChange, currencyList } = this.props;
     return (
-      <select className='CurrencySelector' value={value} onChange={onChange}>
+      <select className='CurrencySelector' ref={forwardedRef} defaultValue={defaultValue} value={value} onChange={onChange}>
         {currencyList.map(symbol => <option key={symbol}>{symbol}</option>)}
       </select>
     )
   }
 }
 
-const mapStatesToProps = (state) => ({
+const mapStateToProps = (state) => ({
   currencyList: selectors.getCurrencyList(state)
 });
 
-export default connect(mapStatesToProps)(CurrencySelector);
+const ConenctedCurrencySelector = connect(mapStateToProps)(CurrencySelector);
+
+export default React.forwardRef(((props, ref) => <ConenctedCurrencySelector {...props} forwardedRef={ref} />));

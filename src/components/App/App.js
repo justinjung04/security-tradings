@@ -1,13 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import firebase from 'firebase/app';
 
 import SignIn from '../SignIn';
-import Modal from '../Modal';
 import CurrencySelector from '../CurrencySelector';
 import SecurityForm from '../SecurityForm';
+import SecurityList from '../SecurityList';
+import TransactionList from '../TransactionList';
 
 import * as selectors from '../../redux/selectors';
+import * as actions from '../../redux/actions';
 import removeEventHandlers from '../../firebase/removeEventHandlers';
 import signOut from '../../firebase/signOut';
 import updateCurrency from '../../firebase/updateCurrency';
@@ -20,13 +21,9 @@ class App extends React.PureComponent {
     removeEventHandlers(userId);
   }
 
-  onChangeActiveCurrency = (e) => {
-    const { userId } = this.props;
-    updateCurrency(userId, e.target.value);
-  }
-
 	render() {
-    const { isLoaded, userId, userName, currencyList, activeCurrency } = this.props;
+    const { isLoaded, userId, userName, securityList, transactionList, activeCurrency, setUserAction } = this.props;
+
 		return (
 			<div className='App'>
         <h1>Security tradings</h1>
@@ -38,11 +35,15 @@ class App extends React.PureComponent {
                     {`Welcome ${userName} `}
                     <button onClick={signOut}>Sign out</button>
                   </div>
-                  <div className='main-currency'>
-                    <div className='label'>Currency:</div>
-                    <CurrencySelector value={activeCurrency} onChange={this.onChangeActiveCurrency} />
-                  </div>
-                  <SecurityForm type='add' />
+                  {activeCurrency &&
+                    <div className='main-currency'>
+                      <div className='label'>Currency:</div>
+                      <CurrencySelector value={activeCurrency} onChange={(e) => updateCurrency(userId, e.target.value)} />
+                    </div>
+                  }
+                  <SecurityList />
+                  <TransactionList />
+                  <SecurityForm />
                 </React.Fragment>
               : <SignIn />
             }
@@ -57,7 +58,8 @@ const mapStateToProps = (state) => ({
   isLoaded: selectors.isAppLoaded(state),
   userId: selectors.getUserId(state),
   userName: selectors.getUserName(state),
-  currencyList: selectors.getCurrencyList(state),
+  securityList: selectors.getSecurityList(state),
+  transactionList: selectors.getTransactionList(state),
   activeCurrency: selectors.getActiveCurency(state)
 });
 

@@ -31,32 +31,12 @@ https.get('https://www.bankofcanada.ca/valet/observations/group/FX_RATES_DAILY/j
   });
 });
 
-https.get('https://min-api.cryptocompare.com/data/all/coinlist', (res) => {
-  res.setEncoding('utf8');
-  let responseText = '';
-  res.on('data', (data) => {
-    responseText += data;
-  });
-  res.on('end', () => {
-    const responseObject = JSON.parse(responseText);
-    this.cryptoList = Object.keys(responseObject.Data).map(symbol => ({
-      name: responseObject.Data[symbol].CoinName,
-      image: responseObject.Data[symbol].ImageUrl,
-      symbol
-    }));
-  });
-});
-
 app.get('/currency-list', (req, res) => {
   res.json({ data: this.currencyList });
 });
 
 app.get('/currency-rates', (req, res) => {
   
-});
-
-app.get('/crypto-list', (req, res) => {
-  res.json({ data: this.cryptoList });
 });
 
 app.get('/', (req, res) => {
