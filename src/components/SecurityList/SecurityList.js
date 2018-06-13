@@ -13,7 +13,7 @@ class SecurityList extends React.PureComponent {
 
     return (
       <div className='SecurityList'>
-        <h3>Securities:</h3>
+        <h3>Securities</h3>
         {securityList.map((security, i) => {
           const filteredList = transactionList.filter(({ securityId }) => securityId === security.id);
           const totalUnits = filteredList.reduce((total, { action, unit }) => {

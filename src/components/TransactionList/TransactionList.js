@@ -13,7 +13,7 @@ class TransactionList extends React.PureComponent {
 
     return (
       <div className='TransactionList'>
-        <h3>Transactions:</h3>
+        <h3>Transactions</h3>
         {transactionList.map((transaction, i) => (
           <TransactionListItem key={transaction.id} transaction={transaction} />
         ))}

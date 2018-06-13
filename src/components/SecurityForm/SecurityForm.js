@@ -57,7 +57,7 @@ class SecurityForm extends React.PureComponent {
 
     return (
       <div className='SecurityForm' style={{ display }}>
-        <div className='title'>Form</div>
+        <h3>Form</h3>
         <div className='row'>
           <div className='label'>Type</div>
           {action.type === 'add'

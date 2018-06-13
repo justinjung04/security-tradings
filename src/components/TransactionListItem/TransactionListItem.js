@@ -35,7 +35,7 @@ class TransactionListItem extends React.PureComponent {
     return (
       <div className='TransactionListItem'>
         <div>{transaction.action}</div>
-        <div>{transaction.id}</div>
+        <div>{transaction.securityName}</div>
         {isEditing
           ? <React.Fragment>
               <div>{transaction.unit}</div>
