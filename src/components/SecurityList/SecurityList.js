@@ -11,10 +11,6 @@ import * as actions from '../../redux/actions';
 import './SecurityList.scss';
 
 class SecurityList extends React.PureComponent {
-  componentDidMount() {
-    console.log(this.props.currencyRates);
-  }
-
   updateCurrency = (e) => {
     const { userId } = this.props;
     updateCurrency(userId, e.target.value);
@@ -22,9 +18,24 @@ class SecurityList extends React.PureComponent {
 
   getCurrencyRate = (date, currencyFrom, currencyTo) => {
     const { currencyRates } = this.props;
-    const rate1 = currencyRates[date][currencyFrom] || 1;
-    const rate2 = currencyRates[date][currencyTo] || 1;
+    let dateString = date;
+    let count = 0;
+    while (!currencyRates[dateString] && count < 2) {
+      const nextDay = new Date(dateString);
+      nextDay.setDate(nextDay.getDate() + 1);
+      dateString = `${nextDay.getUTCFullYear()}-${nextDay.getUTCMonth() < 9 ? '0' : ''}${nextDay.getUTCMonth() + 1}-${nextDay.getUTCDate() < 10 ? '0' : ''}${nextDay.getUTCDate()}`;
+      count++;
+    }
+    if (count === 2) {
+      return -1;
+    }
+    const rate1 = currencyRates[dateString][currencyFrom] || 1;
+    const rate2 = currencyRates[dateString][currencyTo] || 1;
     return rate1 / rate2;
+  }
+
+  roundToTwoDecimalPlaces = (num) => {
+    return Math.round(num * 100) / 100;
   }
 
   render() {
@@ -46,16 +57,16 @@ class SecurityList extends React.PureComponent {
           }, 0);
           const totalPrice = filteredList.reduce((result, { action, date, price, currency }) => {
             const rate = (currency === activeCurrency) ? 1 : this.getCurrencyRate(date, currency, activeCurrency);
-            return (action === 'buy') ? result + (price * rate) : result - (price * rate);
+            return (action === 'buy' && rate > 0) ? result + (price * rate) : result - (price * rate);
           }, 0);
-          const acb = (totalUnits > 0) ? Math.round(totalPrice / totalUnits * 100) / 100 : 'n/a';
+          const acb = (totalUnits > 0) ? this.roundToTwoDecimalPlaces(totalPrice / totalUnits) : 'n/a';
 
           return (
             <div key={i} className='row'>
               <div>{security.type}</div>
               <div>{`${security.name} (${security.symbol})`}</div>
               <div>{totalUnits}</div>
-              <div>{totalPrice}</div>
+              <div>{this.roundToTwoDecimalPlaces(totalPrice)}</div>
               <div>{acb}</div>
               <button onClick={() => setUserAction('buy', security)}>Buy</button>
               <button onClick={() => setUserAction('sell', security)}>Sell</button>
