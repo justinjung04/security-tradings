@@ -8,12 +8,14 @@ import App from './components/App';
 import rootReducer from './redux/reducers/rootReducer';
 import * as actions from './redux/actions';
 import getCurrencyList from './server-apis/getCurrencyList';
+import getCurrencyRates from './server-apis/getCurrencyRates';
 import initialize from './firebase/initialize';
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 const { dispatch } = store;
 
 getCurrencyList(dispatch);
+getCurrencyRates(dispatch);
 initialize(dispatch);
 
 const render = (App) => {

@@ -8,15 +8,11 @@ const https = require('https');
 const app = express();
 const compiler = webpack(config);
 
-app.use(devMiddleware(compiler, {
-	logLevel: 'warn'
-}));
-
+app.use(devMiddleware(compiler, { logLevel: 'warn' }));
 app.use(hotMiddleware(compiler));
 
 this.currencyList = [];
-this.currencyRates = [];
-this.cryptoList = [];
+this.currencyRates = {};
 
 https.get('https://www.bankofcanada.ca/valet/observations/group/FX_RATES_DAILY/json', (res) => {
   res.setEncoding('utf8');
@@ -28,6 +24,16 @@ https.get('https://www.bankofcanada.ca/valet/observations/group/FX_RATES_DAILY/j
     const responseObject = JSON.parse(responseText);
     this.currencyList = Object.keys(responseObject.seriesDetail).map(key => key.slice(2, -3));
     this.currencyList.push('CAD');
+    this.currencyRates = responseObject.observations.reduce((result, { d, ...rates }) => {
+      return {
+        ...result,
+        [d]: Object.keys(rates).reduce((result, key) => { 
+          return {
+            ...result, [key.slice(2, -3)]: rates[key].v
+          }
+        }, {})
+      }
+    }, {});
   });
 });
 
@@ -36,7 +42,7 @@ app.get('/currency-list', (req, res) => {
 });
 
 app.get('/currency-rates', (req, res) => {
-  
+  res.json({ data: this.currencyRates });
 });
 
 app.get('/', (req, res) => {

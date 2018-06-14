@@ -11,6 +11,11 @@ export default (initialCurrency) => (currency = initialCurrency, action) => {
         ...currency,
         active: payload.symbol
       };
+    case 'SET_CURRENCY_RATES':
+      return {
+        ...currency,
+        rates: payload.rates
+      };
     default:
       return currency;
   }
