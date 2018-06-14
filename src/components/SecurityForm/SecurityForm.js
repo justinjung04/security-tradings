@@ -73,14 +73,14 @@ class SecurityForm extends React.PureComponent {
         <div className='row'>
           <div className='label'>Name</div>
           {action.type === 'add'
-            ? <input ref={this.nameInput} type='text' /> 
+            ? <input ref={this.nameInput} /> 
             : <div>{action.security.name}</div>
           }
         </div>
         <div className='row'>
           <div className='label'>Symbol</div>
           {action.type === 'add'
-            ? <input ref={this.symbolInput} type='text' />
+            ? <input ref={this.symbolInput} />
             : <div>{action.security.symbol}</div>
           }
         </div>
@@ -88,11 +88,11 @@ class SecurityForm extends React.PureComponent {
           <React.Fragment>
             <div className='row'>
               <div className='label'>Units</div>
-              <input ref={this.unitInput} type='number' />
+              <input ref={this.unitInput} />
             </div>
             <div className='row'>
               <div className='label'>Price</div>
-              <input ref={this.priceInput} type='number' />
+              <input ref={this.priceInput} />
             </div>
             <div className='row'>
               <div className='label'>Currency</div>

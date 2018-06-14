@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import CurrencySelector from '../CurrencySelector';
+import editTransaction from '../../firebase/editTransaction';
 import deleteTransaction from '../../firebase/deleteTransaction';
 import * as selectors from '../../redux/selectors';
 
@@ -10,6 +11,9 @@ import './TransactionListItem.scss';
 class TransactionListItem extends React.PureComponent {
   constructor() {
     super();
+    this.dateInput = React.createRef();
+    this.unitInput = React.createRef();
+    this.priceInput = React.createRef();
     this.currencySelector = React.createRef();
     this.state = {
       isEditing: false
@@ -17,10 +21,18 @@ class TransactionListItem extends React.PureComponent {
   }
 
   toggleEdit = () => {
-    if (this.currencySelector.current) {
-      console.log(this.currencySelector.current.value);
-    }
     this.setState((prevState) => ({ isEditing: !prevState.isEditing }));
+  }
+
+  onClickSave = () => {
+    const { userId, transaction } = this.props;
+    editTransaction(userId, transaction.id, {
+      '/date': this.dateInput.current.value,
+      '/unit': this.unitInput.current.value,
+      '/price': this.priceInput.current.value,
+      '/currency': this.currencySelector.current.value,
+    });
+    this.toggleEdit();
   }
 
   deleteTransaction = () => {
@@ -35,16 +47,19 @@ class TransactionListItem extends React.PureComponent {
     return (
       <div className='TransactionListItem'>
         <div>{transaction.action}</div>
-        <div>{transaction.securityName}</div>
         {isEditing
           ? <React.Fragment>
-              <div>{transaction.unit}</div>
-              <div>{transaction.price}</div>
+              <input ref={this.dateInput} defaultValue={transaction.date} type='date' />
+              <div>{transaction.securityName}</div>
+              <input ref={this.unitInput} defaultValue={transaction.unit} />
+              <input ref={this.priceInput} defaultValue={transaction.price} />
               <CurrencySelector ref={this.currencySelector} defaultValue={transaction.currency} />
-              <button onClick={() => {}}>save</button>
+              <button onClick={this.onClickSave}>save</button>
               <button onClick={this.toggleEdit}>cancel</button>
             </React.Fragment>
           : <React.Fragment>
+              <div>{transaction.date}</div>
+              <div>{transaction.securityName}</div>
               <div>{transaction.unit}</div>
               <div>{transaction.price}</div>
               <div>{transaction.currency}</div>
