@@ -14,5 +14,5 @@ export const getTransactionList = (state) => state.transaction.list;
 
 // currency
 export const getCurrencyList = (state) => state.currency.list;
-export const getActiveCurency = (state) => state.currency.active;
+export const getActiveCurrency = (state) => state.currency.active;
 export const getCurrencyRates = (state) => state.currency.rates;

@@ -28,8 +28,8 @@ class TransactionListItem extends React.PureComponent {
     const { userId, transaction } = this.props;
     editTransaction(userId, transaction.id, {
       '/date': this.dateInput.current.value,
-      '/unit': this.unitInput.current.value,
-      '/price': this.priceInput.current.value,
+      '/unit': Number(this.unitInput.current.value),
+      '/price': Number(this.priceInput.current.value),
       '/currency': this.currencySelector.current.value,
     });
     this.toggleEdit();

@@ -2,12 +2,4 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  .row {
-    display: flex;
-
-    & > * {
-      margin: 0 10px;
-    }
-  }
 }

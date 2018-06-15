@@ -116,7 +116,7 @@ class SecurityForm extends React.PureComponent {
 const mapStateToProps = (state) => ({
   userId: selectors.getUserId(state),
   action: selectors.getUserAction(state),
-  activeCurrency: selectors.getActiveCurency(state)
+  activeCurrency: selectors.getActiveCurrency(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
