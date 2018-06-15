@@ -59,11 +59,11 @@ class SecurityListItem extends React.PureComponent {
 
     return (
       <div className='SecurityListItem'>
-        <div>{security.type}</div>
-        <div>{`${security.name} (${security.symbol})`}</div>
-        <div>{totalUnits}</div>
-        <div>{this.roundToTwoDecimalPlaces(totalPrice)}</div>
-        <div>{acb}</div>
+        <div className={`badge ${security.type}`}>{security.type}</div>
+        <div className='name'>{`${security.name} (${security.symbol})`}</div>
+        <div className='units'>{totalUnits}</div>
+        <div className='cost'>{this.roundToTwoDecimalPlaces(totalPrice)}</div>
+        <div className='acb'>{acb}</div>
         <button onClick={this.onClickBuy}>Buy</button>
         <button onClick={this.onClickSell}>Sell</button>
         <button onClick={this.onClickDelete}>Delete</button>

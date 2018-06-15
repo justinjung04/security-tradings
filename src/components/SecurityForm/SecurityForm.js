@@ -29,7 +29,7 @@ class SecurityForm extends React.PureComponent {
     switch (action.type) {
       case 'add':
         addSecurity(userId, {
-          type: this.typeInput.current.value,
+          type: this.typeInput.current.value.toLowerCase(),
           name: this.nameInput.current.value,
           symbol: this.symbolInput.current.value
         });

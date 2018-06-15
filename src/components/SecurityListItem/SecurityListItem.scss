@@ -1,7 +1,38 @@
 .SecurityListItem {
   display: flex;
+  padding: 5px;
 
-  & > * {
+  & > div {
+    width: 100px;
     margin: 0 10px;
+  }
+
+  .name {
+    width: 200px;
+  }
+
+  .badge {
+    width: 50px;
+    padding: 3px;
+    border-radius: 5px;
+    font-size: 12px;
+    text-align: center;
+    color: white;
+
+    &.crypto {
+      background: #5cb85c;
+    }
+
+    &.stock {
+      background: #337ab7;
+    }
+
+    &.option {
+      background: #5bc0de;
+    }
+
+    &.bond {
+      background: #f0ad4e;
+    }
   }
 }
