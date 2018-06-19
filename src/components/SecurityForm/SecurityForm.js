@@ -56,57 +56,65 @@ class SecurityForm extends React.PureComponent {
     const display = (action.type === '') ? 'none' : 'flex';
 
     return (
-      <div className='SecurityForm' style={{ display }}>
-        <h3>Form</h3>
-        <div className='row'>
-          <div className='label'>Type</div>
-          {action.type === 'add'
-            ? <select ref={this.typeInput}>
-                <option>Crypto</option>
-                <option>Stock</option>
-                <option>Option</option>
-                <option>Bond</option>
-              </select>
-            : <div>{action.security.type}</div>
+      <div className='SecurityForm' style={{ display }} onClick={resetUserAction}>
+        <div className='container' onClick={(e) => e.stopPropagation()}>
+          <h3>Form</h3>
+          {(action.type === 'buy' || action.type === 'sell') &&
+            <div className='row'>
+              <div className='label'>Action</div>
+              <div>{action.type}</div>
+            </div>
           }
-        </div>
-        <div className='row'>
-          <div className='label'>Name</div>
-          {action.type === 'add'
-            ? <input ref={this.nameInput} /> 
-            : <div>{action.security.name}</div>
+          <div className='row'>
+            <div className='label'>Type</div>
+            {action.type === 'add'
+              ? <select ref={this.typeInput}>
+                  <option>Crypto</option>
+                  <option>Stock</option>
+                  <option>Option</option>
+                  <option>Bond</option>
+                </select>
+              : <div>{action.security.type}</div>
+            }
+          </div>
+          <div className='row'>
+            <div className='label'>Name</div>
+            {action.type === 'add'
+              ? <input ref={this.nameInput} /> 
+              : <div>{action.security.name}</div>
+            }
+          </div>
+          <div className='row'>
+            <div className='label'>Symbol</div>
+            {action.type === 'add'
+              ? <input ref={this.symbolInput} />
+              : <div>{action.security.symbol}</div>
+            }
+          </div>
+          {(action.type === 'buy' || action.type === 'sell') &&
+            <React.Fragment>
+              <div className='row'>
+                <div className='label'>Units</div>
+                <input ref={this.unitInput} />
+              </div>
+              <div className='row'>
+                <div className='label'>Price</div>
+                <input ref={this.priceInput} />
+              </div>
+              <div className='row'>
+                <div className='label'>Currency</div>
+                <CurrencySelector ref={this.currencyInput} defaultValue={activeCurrency} />
+              </div>
+              <div className='row'>
+                <div className='label'>Date</div>
+                <input ref={this.dateInput} type='date' defaultValue={this.defaultDate} />
+              </div>
+            </React.Fragment>
           }
-        </div>
-        <div className='row'>
-          <div className='label'>Symbol</div>
-          {action.type === 'add'
-            ? <input ref={this.symbolInput} />
-            : <div>{action.security.symbol}</div>
-          }
-        </div>
-        {(action.type === 'buy' || action.type === 'sell') &&
-          <React.Fragment>
-            <div className='row'>
-              <div className='label'>Units</div>
-              <input ref={this.unitInput} />
-            </div>
-            <div className='row'>
-              <div className='label'>Price</div>
-              <input ref={this.priceInput} />
-            </div>
-            <div className='row'>
-              <div className='label'>Currency</div>
-              <CurrencySelector ref={this.currencyInput} defaultValue={activeCurrency} />
-            </div>
-            <div className='row'>
-              <div className='label'>Date</div>
-              <input ref={this.dateInput} type='date' defaultValue={this.defaultDate} />
-            </div>
-          </React.Fragment>
-        }
-        <div className='buttons'>
-          <button onClick={this.onClickSubmit}>Submit</button>
-          <button onClick={resetUserAction}>Cancel</button>
+          <div className='buttons'>
+            <button onClick={this.onClickSubmit}>Submit</button>
+            <button onClick={resetUserAction}>Cancel</button>
+          </div>
         </div>
       </div>
     );

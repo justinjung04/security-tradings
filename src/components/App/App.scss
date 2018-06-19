@@ -1,4 +1,4 @@
-html, body {
+html, body, #app, .App {
   margin: 0;
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -15,9 +15,9 @@ input {
 
 .App {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
+  width: 100%;
 
   .user-info {
     padding: 10px;
