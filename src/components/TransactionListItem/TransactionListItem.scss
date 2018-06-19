@@ -1,7 +1,38 @@
 .TransactionListItem {
   display: flex;
+  padding: 5px;
 
   & > * {
+    width: 80px;
     margin: 0 10px;
+  }
+
+  .action {
+    width: 40px;
+    padding: 3px;
+    border-radius: 5px;
+    font-size: 12px;
+    text-align: center;
+    color: white;
+
+    &.buy {
+      background: #337ab7;
+    }
+
+    &.sell {
+      background: #b73333;
+    }
+  }
+
+  .date {
+    width: 120px;
+  }
+
+  .name {
+    width: 160px;
+  }
+
+  .buttons {
+    display: flex;
   }
 }

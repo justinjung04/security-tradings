@@ -4,8 +4,7 @@ import * as actions from '../redux/actions';
 
 const onSettingsUpdated = (dispatch) => (snapshot) => {
   const dataObject = snapshot.val();
-  const { currency = 'USD' } = dataObject;
-  dispatch(actions.setActiveCurrency(currency));
+  dispatch(actions.setActiveCurrency(dataObject.currency));
 };
 
 const onSecuritiesUpdated = (dispatch) => (snapshot) => {

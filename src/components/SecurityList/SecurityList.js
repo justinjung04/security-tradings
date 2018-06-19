@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import CurrencySelector from '../CurrencySelector';
 import SecurityListItem from '../SecurityListItem';
+import SecurityListItemHeader from '../SecurityListItemHeader';
 
 import updateCurrency from '../../firebase/updateCurrency';
 import * as selectors from '../../redux/selectors';
@@ -27,14 +28,13 @@ class SecurityList extends React.PureComponent {
     return (
       <div className='SecurityList'>
         <h3>Securities</h3>
-        {activeCurrency &&
-          <div className='main-currency'>
-            <div className='label'>Currency:</div>
+        <div>
+          <SecurityListItemHeader>
             <CurrencySelector value={activeCurrency} onChange={this.onChangeCurrencySelector} />
-          </div>
-        }
-        {securityList.map((security, i) => <SecurityListItem key={i} security={security} />)}
-        <button onClick={this.onClickNewSecurity}>New security</button>
+          </SecurityListItemHeader>
+          {securityList.map((security, i) => <SecurityListItem key={i} security={security} />)}
+        </div>
+        <button className='add-button' onClick={this.onClickNewSecurity}>New security</button>
       </div>
     );
   }

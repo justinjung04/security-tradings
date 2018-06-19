@@ -7,10 +7,6 @@
     margin: 0 10px;
   }
 
-  .name {
-    width: 200px;
-  }
-
   .badge {
     width: 50px;
     padding: 3px;
@@ -34,5 +30,13 @@
     &.bond {
       background: #f0ad4e;
     }
+  }
+
+  .name {
+    width: 200px;
+  }
+
+  .buttons {
+    width: auto;
   }
 }

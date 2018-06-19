@@ -46,25 +46,29 @@ class TransactionListItem extends React.PureComponent {
 
     return (
       <div className='TransactionListItem'>
-        <div>{transaction.action}</div>
+        <div className={`action ${transaction.action}`}>{transaction.action}</div>
         {isEditing
           ? <React.Fragment>
-              <input ref={this.dateInput} defaultValue={transaction.date} type='date' />
-              <div>{transaction.securityName}</div>
+              <input className='date' ref={this.dateInput} defaultValue={transaction.date} type='date' />
+              <div className='name'>{transaction.securityName}</div>
               <input ref={this.unitInput} defaultValue={transaction.unit} />
               <input ref={this.priceInput} defaultValue={transaction.price} />
               <CurrencySelector ref={this.currencySelector} defaultValue={transaction.currency} />
-              <button onClick={this.onClickSave}>save</button>
-              <button onClick={this.toggleEdit}>cancel</button>
+              <div className='buttons'>
+                <button onClick={this.onClickSave}>save</button>
+                <button onClick={this.toggleEdit}>cancel</button>
+              </div>
             </React.Fragment>
           : <React.Fragment>
-              <div>{transaction.date}</div>
-              <div>{transaction.securityName}</div>
+              <div className='date'>{transaction.date}</div>
+              <div className='name'>{transaction.securityName}</div>
               <div>{transaction.unit}</div>
               <div>{transaction.price}</div>
               <div>{transaction.currency}</div>
-              <button onClick={this.toggleEdit}>edit</button>
-              <button onClick={this.deleteTransaction}>delete</button>
+              <div className='buttons'>
+                <button onClick={this.toggleEdit}>Edit</button>
+                <button onClick={this.deleteTransaction}>Delete</button>
+              </div>
             </React.Fragment>
         }
       </div>

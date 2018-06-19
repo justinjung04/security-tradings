@@ -19,7 +19,7 @@ export default {
   },
   currency: {
     list: [],
-    active: '',
+    active: 'CAD',
     rates: {}
   }
 }

@@ -64,9 +64,11 @@ class SecurityListItem extends React.PureComponent {
         <div className='units'>{totalUnits}</div>
         <div className='cost'>{this.roundToTwoDecimalPlaces(totalPrice)}</div>
         <div className='acb'>{acb}</div>
-        <button onClick={this.onClickBuy}>Buy</button>
-        <button onClick={this.onClickSell}>Sell</button>
-        <button onClick={this.onClickDelete}>Delete</button>
+        <div className='buttons'>
+          <button onClick={this.onClickBuy}>Buy</button>
+          <button onClick={this.onClickSell}>Sell</button>
+          <button onClick={this.onClickDelete}>Delete</button>
+        </div>
       </div>
     )
   }

@@ -1,0 +1,25 @@
+.SecurityListItemHeader {
+  display: flex;
+  padding: 5px;
+  font-weight: bold;
+
+  & > div {
+    width: 100px;
+    margin: 0 10px;
+  }
+
+  .name {
+    width: 200px;
+    margin-left: 80px;
+  }
+  
+  .currency {
+    margin-left: 5px;
+    color: gray;
+    font-size: 0.8em;
+  }
+
+  .selector {
+    text-align: right;
+  }
+}
