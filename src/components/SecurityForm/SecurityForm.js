@@ -20,7 +20,7 @@ class SecurityForm extends React.PureComponent {
     this.symbolInput = React.createRef();
     this.dateInput = React.createRef();
     this.unitInput = React.createRef();
-    this.priceInput = React.createRef();
+    this.costInput = React.createRef();
     this.currencyInput = React.createRef();
   }
 
@@ -43,7 +43,7 @@ class SecurityForm extends React.PureComponent {
           securitySymbol: action.security.symbol,
           date: this.dateInput.current.value,
           unit: Number(this.unitInput.current.value),
-          price: Number(this.priceInput.current.value),
+          cost: Number(this.costInput.current.value),
           currency: this.currencyInput.current.value
         });
         break;
@@ -98,8 +98,8 @@ class SecurityForm extends React.PureComponent {
                 <input ref={this.unitInput} />
               </div>
               <div className='row'>
-                <div className='label'>Price</div>
-                <input ref={this.priceInput} />
+                <div className='label'>{action.type === 'buy' ? 'Cost' : 'Proceed'}</div>
+                <input ref={this.costInput} />
               </div>
               <div className='row'>
                 <div className='label'>Currency</div>

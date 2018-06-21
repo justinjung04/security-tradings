@@ -19,7 +19,7 @@ class TransactionList extends React.PureComponent {
             <div className='date'>Date</div>
             <div className='name'>Name</div>
             <div>Units</div>
-            <div>Cost</div>
+            <div>Cost/Proceed</div>
             <div>Currency</div>
           </div>
           {transactionList.map((transaction, i) => (

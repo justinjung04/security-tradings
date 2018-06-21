@@ -32,7 +32,9 @@ class SecurityList extends React.PureComponent {
           <SecurityListItemHeader>
             <CurrencySelector value={activeCurrency} onChange={this.onChangeCurrencySelector} />
           </SecurityListItemHeader>
-          {securityList.map((security, i) => <SecurityListItem key={i} security={security} />)}
+          {securityList.map((security, i) =>
+            <SecurityListItem key={i} security={security} />
+          )}
           <button className='add-button' onClick={this.onClickNewSecurity}>New security</button>
         </div>
       </div>

@@ -13,7 +13,7 @@ class TransactionListItem extends React.PureComponent {
     super();
     this.dateInput = React.createRef();
     this.unitInput = React.createRef();
-    this.priceInput = React.createRef();
+    this.costInput = React.createRef();
     this.currencySelector = React.createRef();
     this.state = {
       isEditing: false
@@ -29,7 +29,7 @@ class TransactionListItem extends React.PureComponent {
     editTransaction(userId, transaction.id, {
       '/date': this.dateInput.current.value,
       '/unit': Number(this.unitInput.current.value),
-      '/price': Number(this.priceInput.current.value),
+      '/cost': Number(this.costInput.current.value),
       '/currency': this.currencySelector.current.value,
     });
     this.toggleEdit();
@@ -50,9 +50,9 @@ class TransactionListItem extends React.PureComponent {
         {isEditing
           ? <React.Fragment>
               <input className='date' ref={this.dateInput} defaultValue={transaction.date} type='date' />
-              <div className='name'>{transaction.securityName}</div>
+              <div className='name'>{`${transaction.securityName} (${transaction.securitySymbol})`}</div>
               <input ref={this.unitInput} defaultValue={transaction.unit} />
-              <input ref={this.priceInput} defaultValue={transaction.price} />
+              <input ref={this.costInput} defaultValue={transaction.cost} />
               <CurrencySelector ref={this.currencySelector} defaultValue={transaction.currency} />
               <div className='buttons'>
                 <button onClick={this.onClickSave}>save</button>
@@ -61,9 +61,9 @@ class TransactionListItem extends React.PureComponent {
             </React.Fragment>
           : <React.Fragment>
               <div className='date'>{transaction.date}</div>
-              <div className='name'>{transaction.securityName}</div>
+              <div className='name'>{`${transaction.securityName} (${transaction.securitySymbol})`}</div>
               <div>{transaction.unit}</div>
-              <div>{transaction.price}</div>
+              <div>{transaction.cost}</div>
               <div>{transaction.currency}</div>
               <div className='buttons'>
                 <button onClick={this.toggleEdit}>Edit</button>

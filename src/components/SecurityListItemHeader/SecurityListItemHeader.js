@@ -12,12 +12,16 @@ class SecurityListItemHeader extends React.PureComponent {
       <div className='SecurityListItemHeader'>
         <div className='name'>Name</div>
         <div className='units'>Units</div>
-        <div className='cost'>
-          Cost
-          <span className='currency'>({activeCurrency})</span>
-        </div>
         <div className='acb'>
           ACB
+          <span className='currency'>({activeCurrency})</span>
+        </div>
+        <div className='acb-per-unit'>
+          ACB per unit
+          <span className='currency'>({activeCurrency})</span>
+        </div>
+        <div className='realized-gain'>
+          Realized gain
           <span className='currency'>({activeCurrency})</span>
         </div>
         <div className='selector'>
