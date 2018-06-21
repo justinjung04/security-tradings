@@ -10,6 +10,7 @@ import './TransactionList.scss';
 class TransactionList extends React.PureComponent {
   render() {
     const { transactionList } = this.props;
+    transactionList.reverse();
 
     return (
       <div className='TransactionList'>

@@ -2,9 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import CurrencySelector from '../CurrencySelector';
+
 import editTransaction from '../../firebase/editTransaction';
 import deleteTransaction from '../../firebase/deleteTransaction';
 import * as selectors from '../../redux/selectors';
+import getCurrencyRate from '../../services/getCurrencyRate';
 
 import './TransactionListItem.scss';
 
@@ -42,11 +44,12 @@ class TransactionListItem extends React.PureComponent {
 
   render() {
     const { isEditing } = this.state;
-    const { transaction } = this.props;
+    const { transaction, currencyRates, activeCurrency } = this.props;
+    const isPending = transaction.currency !== activeCurrency && getCurrencyRate(currencyRates, transaction.date, transaction.currency, activeCurrency);
 
     return (
       <div className='TransactionListItem'>
-        <div className={`action ${transaction.action}`}>{transaction.action}</div>
+        <div className={`action ${transaction.action} ${isPending ? 'pending' : ''}`}>{transaction.action}</div>
         {isEditing
           ? <React.Fragment>
               <input className='date' ref={this.dateInput} defaultValue={transaction.date} type='date' />
@@ -77,7 +80,9 @@ class TransactionListItem extends React.PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  userId: selectors.getUserId(state)
+  userId: selectors.getUserId(state),
+  currencyRates: selectors.getCurrencyRates(state),
+  activeCurrency: selectors.getActiveCurrency(state)
 });
 
 export default connect(mapStateToProps)(TransactionListItem);

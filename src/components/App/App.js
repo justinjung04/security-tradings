@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import SignIn from '../SignIn';
-
 import SecurityForm from '../SecurityForm';
 import SecurityList from '../SecurityList';
 import TransactionList from '../TransactionList';
