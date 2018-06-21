@@ -14,7 +14,7 @@ app.use(hotMiddleware(compiler));
 this.currencyList = [];
 this.currencyRates = {};
 
-https.get('https://www.bankofcanada.ca/valet/observations/group/FX_RATES_DAILY/json', (res) => {
+const getCurrencyRates = https.get('https://www.bankofcanada.ca/valet/observations/group/FX_RATES_DAILY/json', (res) => {
   res.setEncoding('utf8');
   let responseText = '';
   res.on('data', (data) => {
@@ -36,6 +36,10 @@ https.get('https://www.bankofcanada.ca/valet/observations/group/FX_RATES_DAILY/j
     }, {});
   });
 });
+
+setInterval(() => {
+  getCurrencyRates();
+}, 8640000);
 
 app.get('/currency-list', (req, res) => {
   res.json({ data: this.currencyList });
