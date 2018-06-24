@@ -45,7 +45,7 @@ class TransactionListItem extends React.PureComponent {
   render() {
     const { isEditing } = this.state;
     const { transaction, currencyRates, activeCurrency } = this.props;
-    const isPending = transaction.currency !== activeCurrency && getCurrencyRate(currencyRates, transaction.date, transaction.currency, activeCurrency);
+    const isPending = transaction.currency !== activeCurrency && getCurrencyRate(currencyRates, transaction.date, transaction.currency, activeCurrency) === -1;
 
     return (
       <div className='TransactionListItem'>
